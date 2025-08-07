@@ -24,9 +24,9 @@
     <dialog id="todo-dialog" class="form-dialog">
       <form class="todo-form" action="">
         <label for="name">Name: </label>
-        <input type="text" id="name" required>
+        <input type="text" id="name" name="name" required />
         <label for="description">Description: </label>
-        <input type="text" id="description" required>
+        <input type="text" id="description" name="description" required />
         <label for="priority">Priority</label>
         <select name="priority" id="priority">
           <option value="low">Low</option>
@@ -34,14 +34,13 @@
           <option value="high">High</option>
         </select>
         <label for="dueDate">Due Date: </label>
-        <input type="datetime-local" id="dueDate" name="dueDate">
+        <input type="datetime-local" id="dueDate" name="dueDate" />
         <button type="submit">Submit</button>
       </form>
     </dialog>
     <dialog id="project-dialog" class="form-dialog">
       <label for="name">Name: </label>
-      <input type="text" id="name" required>
+      <input type="text" id="name" required />
     </dialog>
-
   </body>
 </html>

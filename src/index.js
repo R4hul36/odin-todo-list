@@ -2,10 +2,11 @@ import './styles.css'
 import { createTodo } from './modules/todo'
 import { createProject } from './modules/project'
 import { removeTodo, updateTodo } from './modules/todoManger'
+import { handleTodos } from './modules/domController'
 
 console.log('hellow world')
 
-// let todos = []
+let todos = []
 // let projects = []
 
 // const myTodo = createTodo(
@@ -27,12 +28,24 @@ console.log('hellow world')
 // projects.push(myProject)
 // console.log(projects)
 
-const taskButton = document.querySelector("#add-todo");
-const projectButton = document.querySelector("#add-project");
-const taskDialog = document.querySelector("#todo-dialog");
-const projectDialog = document.querySelector("#project-dialog")
+const taskButton = document.querySelector('#add-todo')
+const projectButton = document.querySelector('#add-project')
+const taskDialog = document.querySelector('#todo-dialog')
+const projectDialog = document.querySelector('#project-dialog')
 
+const todoForm = document.querySelector('.todo-form')
 
-taskButton.addEventListener("click", (e) => {
+taskButton.addEventListener('click', (e) => {
   taskDialog.showModal()
+})
+
+todoForm.addEventListener('submit', (e) => {
+  e.preventDefault()
+  const formData = new FormData(todoForm)
+
+  const allFields = Object.fromEntries(formData)
+  console.log(createTodo(allFields))
+  todos.push(createTodo(allFields))
+  handleTodos(todos)
+  taskDialog.close()
 })
