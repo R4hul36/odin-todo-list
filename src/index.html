@@ -10,16 +10,38 @@
       <aside class="left">
         <div class="tasks-section">
           <p class="tasks-link">Tasks</p>
-          <button class="add-btn">+</button>
+          <button class="add-btn" id="add-todo">+</button>
         </div>
         <div class="projects-section">
           <p class="projects-link">Projects</p>
-          <button class="add-btn">+</button>
+          <button class="add-btn" id="add-project">+</button>
         </div>
       </aside>
       <div class="right">
         <h1>Todos</h1>
       </div>
     </div>
+    <dialog id="todo-dialog" class="form-dialog">
+      <form class="todo-form" action="">
+        <label for="name">Name: </label>
+        <input type="text" id="name" required>
+        <label for="description">Description: </label>
+        <input type="text" id="description" required>
+        <label for="priority">Priority</label>
+        <select name="priority" id="priority">
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+        <label for="dueDate">Due Date: </label>
+        <input type="datetime-local" id="dueDate" name="dueDate">
+        <button type="submit">Submit</button>
+      </form>
+    </dialog>
+    <dialog id="project-dialog" class="form-dialog">
+      <label for="name">Name: </label>
+      <input type="text" id="name" required>
+    </dialog>
+
   </body>
 </html>
