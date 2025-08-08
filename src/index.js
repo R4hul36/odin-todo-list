@@ -2,7 +2,7 @@ import './styles.css'
 import { createTodo } from './modules/todo'
 import { createProject } from './modules/project'
 import { removeTodo, updateTodo } from './modules/todoManger'
-import { handleTodos } from './modules/domController'
+import { renderTodos } from './modules/domController'
 
 console.log('hellow world')
 
@@ -46,6 +46,6 @@ todoForm.addEventListener('submit', (e) => {
   const allFields = Object.fromEntries(formData)
   console.log(createTodo(allFields))
   todos.push(createTodo(allFields))
-  handleTodos(todos)
+  renderTodos(todos)
   taskDialog.close()
 })
