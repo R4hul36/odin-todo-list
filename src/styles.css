@@ -60,3 +60,34 @@ dialog {
   transform: translate(-50%, -50%);
   padding: 2rem;
 }
+.right-container {
+  margin-top: 30px;
+  padding: 20px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.todo-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  
+}
+
+.todo-row > p {
+  align-self: flex-end;
+}
+.todo-row span {
+  position: absolute;
+  color: grey;
+  font-size: 14px;
+}
+
+.text-wrapper {
+  position: relative;
+}
+.todo-text {
+  
+}

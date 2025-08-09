@@ -42,10 +42,12 @@ taskButton.addEventListener('click', (e) => {
 todoForm.addEventListener('submit', (e) => {
   e.preventDefault()
   const formData = new FormData(todoForm)
+  console.log(todos);
+  
 
   const allFields = Object.fromEntries(formData)
-  console.log(createTodo(allFields))
-  todos.push(createTodo(allFields))
+  
+  todos = [...todos, createTodo(allFields)]
   renderTodos(todos)
   taskDialog.close()
 })
