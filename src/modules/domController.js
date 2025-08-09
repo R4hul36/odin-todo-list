@@ -1,14 +1,14 @@
-import { removeTodo } from "./todoManger"
+import { removeTodo, getTodos } from './todoManger'
 
-export const renderTodos = function (todos) {
-  console.log(todos)
+export const renderTodos = function () {
   const container = document.querySelector('.right-container')
   container.innerHTML = ''
+  console.log(getTodos())
 
-  todos.forEach(({ name, description, priority, date, id }) => {
+  getTodos().forEach(({ name, description, priority, date, id }) => {
     const todoRow = document.createElement('div')
     todoRow.classList.add('todo-row')
-    todoRow.setAttribute("data-id", id);
+    todoRow.setAttribute('data-id', id)
 
     const textWrapper = document.createElement('div')
     textWrapper.classList.add('todo-text')
@@ -18,13 +18,12 @@ export const renderTodos = function (todos) {
     const nameEle = document.createElement('p')
     const descriptionEle = document.createElement('span')
     const editBtn = document.createElement('button')
-    editBtn.textContent = "Edit"
+    editBtn.textContent = 'Edit'
     const deleteBtn = document.createElement('button')
-    deleteBtn.textContent = "Delete"
-    deleteBtn.addEventListener("click", (e) =>{
-      todos = removeTodo(todos, todoRow.dataset.id)
-      console.log(todos);
-      renderTodos(todos)
+    deleteBtn.textContent = 'Delete'
+    deleteBtn.addEventListener('click', (e) => {
+      removeTodo(todoRow.dataset.id)
+      renderTodos()
     })
 
     nameEle.textContent = name
@@ -36,7 +35,7 @@ export const renderTodos = function (todos) {
         console.log('not checked')
       }
     })
-    textWrapper.appendChild(nameEle);
+    textWrapper.appendChild(nameEle)
     textWrapper.appendChild(descriptionEle)
     todoRow.appendChild(checkBox)
     todoRow.appendChild(textWrapper)

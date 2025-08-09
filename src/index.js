@@ -1,12 +1,16 @@
 import './styles.css'
 import { createTodo } from './modules/todo'
 import { createProject } from './modules/project'
-import { removeTodo, updateTodo } from './modules/todoManger'
+import {
+  removeTodo,
+  updateTodo,
+  getTodos,
+  setTodos,
+} from './modules/todoManger'
 import { renderTodos } from './modules/domController'
 
 console.log('hellow world')
 
-let todos = []
 // let projects = []
 
 // const myTodo = createTodo(
@@ -42,12 +46,9 @@ taskButton.addEventListener('click', (e) => {
 todoForm.addEventListener('submit', (e) => {
   e.preventDefault()
   const formData = new FormData(todoForm)
-  console.log(todos);
-  
 
   const allFields = Object.fromEntries(formData)
-  
-  todos = [...todos, createTodo(allFields)]
-  renderTodos(todos)
+  setTodos(createTodo(allFields))
+  renderTodos()
   taskDialog.close()
 })
