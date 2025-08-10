@@ -73,7 +73,6 @@ dialog {
   display: flex;
   align-items: center;
   gap: 1rem;
-  
 }
 
 .todo-row > p {
@@ -89,5 +88,5 @@ dialog {
   position: relative;
 }
 .todo-text {
-  font-size: 16px;
+  /* font-size: 16px; */
 }
