@@ -1,6 +1,6 @@
 import { removeTodo, getTodos } from './todoManger'
 
-export const renderTodos = function () {
+export const renderTodos = function (onEditClick) {
   const container = document.querySelector('.right-container')
   container.innerHTML = ''
   console.log(getTodos())
@@ -19,6 +19,10 @@ export const renderTodos = function () {
     const descriptionEle = document.createElement('span')
     const editBtn = document.createElement('button')
     editBtn.textContent = 'Edit'
+    editBtn.addEventListener('click', () => {
+      onEditClick(id)
+    })
+
     const deleteBtn = document.createElement('button')
     deleteBtn.textContent = 'Delete'
     deleteBtn.addEventListener('click', (e) => {

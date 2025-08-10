@@ -43,12 +43,34 @@ taskButton.addEventListener('click', (e) => {
   taskDialog.showModal()
 })
 
+let currentEditId = null
+
+function handleEditClick(id) {
+  currentEditId = id
+  const todo = getTodos().find((t) => t.id === id)
+  todoForm.name.value = todo.name
+  todoForm.description.value = todo.description
+  // todoForm.priority.value = todo.priority
+  // todoForm.dueDate.value = todo.date
+  taskDialog.showModal()
+}
+
+renderTodos(handleEditClick)
+
 todoForm.addEventListener('submit', (e) => {
   e.preventDefault()
   const formData = new FormData(todoForm)
 
   const allFields = Object.fromEntries(formData)
-  setTodos(createTodo(allFields))
-  renderTodos()
+
+  if (currentEditId) {
+    updateTodo(currentEditId, createTodo(allFields))
+  } else {
+    setTodos(createTodo(allFields))
+  }
+
+  renderTodos(handleEditClick)
+  currentEditId = null
+  todoForm.reset()
   taskDialog.close()
 })
