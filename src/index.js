@@ -7,7 +7,9 @@ import {
   getTodos,
   setTodos,
 } from './modules/todoManger'
-import { renderTodos } from './modules/domController'
+import {getProjects, setProjects } from './modules/projectManager'
+
+import { renderTodos } from './modules/todoDomController'
 
 console.log('hellow world')
 
@@ -38,7 +40,9 @@ const taskDialog = document.querySelector('#todo-dialog')
 const projectDialog = document.querySelector('#project-dialog')
 
 const todoForm = document.querySelector('.todo-form')
+const projectForm = document.querySelector('.project-form')
 
+//Todos
 taskButton.addEventListener('click', (e) => {
   taskDialog.showModal()
 })
@@ -55,22 +59,34 @@ function handleEditClick(id) {
   taskDialog.showModal()
 }
 
-renderTodos(handleEditClick)
 
 todoForm.addEventListener('submit', (e) => {
   e.preventDefault()
-  const formData = new FormData(todoForm)
+  const formData = Object.fromEntries(new FormData(todoForm))
 
-  const allFields = Object.fromEntries(formData)
 
   if (currentEditId) {
-    updateTodo(currentEditId, createTodo(allFields))
+    updateTodo(currentEditId, createTodo(formData))
   } else {
-    setTodos(createTodo(allFields))
+    setTodos(createTodo(formData))
   }
 
   renderTodos(handleEditClick)
   currentEditId = null
   todoForm.reset()
   taskDialog.close()
+})
+
+//Projects
+
+projectButton.addEventListener("click", () => {
+  projectDialog.showModal()
+})
+
+projectDialog.addEventListener("submit", (e) => {
+  e.preventDefault()
+  const formData = Object.fromEntries(new FormData(projectForm))
+  setProjects(createProject(formData))
+  console.log(formData);
+  
 })
