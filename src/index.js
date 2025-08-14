@@ -8,8 +8,8 @@ import {
   setTodos,
 } from './modules/todoManger'
 import {getProjects, setProjects } from './modules/projectManager'
-
 import { renderTodos } from './modules/todoDomController'
+import { renderProjects } from './modules/projectDomController'
 
 console.log('hellow world')
 
@@ -88,5 +88,7 @@ projectDialog.addEventListener("submit", (e) => {
   const formData = Object.fromEntries(new FormData(projectForm))
   setProjects(createProject(formData))
   console.log(formData);
-  
+  console.log(getProjects())
+  renderProjects()
+  projectDialog.close()
 })
