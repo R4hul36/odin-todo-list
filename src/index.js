@@ -7,7 +7,7 @@ import {
   getTodos,
   setTodos,
 } from './modules/todoManger'
-import {getProjects, setProjects } from './modules/projectManager'
+import { getProjects, setProjects } from './modules/projectManager'
 import { renderTodos } from './modules/todoDomController'
 import { renderProjects } from './modules/projectDomController'
 
@@ -59,11 +59,9 @@ function handleEditClick(id) {
   taskDialog.showModal()
 }
 
-
 todoForm.addEventListener('submit', (e) => {
   e.preventDefault()
   const formData = Object.fromEntries(new FormData(todoForm))
-
 
   if (currentEditId) {
     updateTodo(currentEditId, createTodo(formData))
@@ -79,16 +77,20 @@ todoForm.addEventListener('submit', (e) => {
 
 //Projects
 
-projectButton.addEventListener("click", () => {
+projectButton.addEventListener('click', () => {
   projectDialog.showModal()
 })
 
-projectDialog.addEventListener("submit", (e) => {
+const todoBtnClickOnProject = function (id) {
+  console.log('project todo clicked', id)
+}
+
+projectDialog.addEventListener('submit', (e) => {
   e.preventDefault()
   const formData = Object.fromEntries(new FormData(projectForm))
   setProjects(createProject(formData))
-  console.log(formData);
+  console.log(formData)
   console.log(getProjects())
-  renderProjects()
+  renderProjects(todoBtnClickOnProject)
   projectDialog.close()
 })
