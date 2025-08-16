@@ -1,13 +1,14 @@
 import { getProjects } from './projectManager'
 
 export const renderProjects = function (handleTodo) {
-  const rightSection = document.querySelector('.right')
+ 
+  const rightSection = document.querySelector('.right')  
   const container = document.querySelector('.right-container')
-  rightSection.innerHTML = ''
   container.innerHTML = ''
-  const title = document.createElement('h1')
+  const title = document.querySelector(".title")
   title.textContent = 'Projects'
-  rightSection.appendChild(title)
+  rightSection.appendChild(title)  
+  rightSection.appendChild(container)  
 
   getProjects().forEach(({ projectName, projectDescription, id }) => {
     // console.log((projectDescription));

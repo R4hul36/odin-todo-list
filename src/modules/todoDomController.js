@@ -1,9 +1,13 @@
 import { removeTodo, getTodos } from './todoManger'
 
 export const renderTodos = function (onEditClick) {
+  const rightSection = document.querySelector('.right')  
   const container = document.querySelector('.right-container')
-  container.innerHTML = ''
-  console.log(getTodos())
+  container.innerHTML = '' 
+  const title = document.querySelector('.title')
+  title.textContent = 'Todos'
+  rightSection.appendChild(title) 
+  rightSection.appendChild(container) 
 
   getTodos().forEach(({ name, description, priority, date, id }) => {
     const todoRow = document.createElement('div')
@@ -46,5 +50,6 @@ export const renderTodos = function (onEditClick) {
     todoRow.appendChild(editBtn)
     todoRow.appendChild(deleteBtn)
     container.appendChild(todoRow)
+    rightSection.appendChild(container)
   })
 }

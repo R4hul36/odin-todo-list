@@ -34,6 +34,8 @@ console.log('hellow world')
 // projects.push(myProject)
 // console.log(projects)
 
+renderTodos()
+const leftSection = document.querySelector(".left")
 const taskButton = document.querySelector('#add-todo')
 const projectButton = document.querySelector('#add-project')
 const taskDialog = document.querySelector('#todo-dialog')
@@ -93,4 +95,13 @@ projectDialog.addEventListener('submit', (e) => {
   console.log(getProjects())
   renderProjects(todoBtnClickOnProject)
   projectDialog.close()
+})
+
+leftSection.addEventListener("click", (e) => {
+  e.preventDefault()
+  if(e.target.classList.contains("tasks-link")){
+    renderTodos(handleEditClick)
+  }else if (e.target.classList.contains("projects-link")){
+    renderProjects(todoBtnClickOnProject)
+  }
 })
