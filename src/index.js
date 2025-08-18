@@ -13,6 +13,8 @@ import { renderProjects } from './modules/projectDomController'
 
 console.log('hellow world')
 
+let todos = []
+
 // let projects = []
 
 // const myTodo = createTodo(
@@ -34,7 +36,7 @@ console.log('hellow world')
 // projects.push(myProject)
 // console.log(projects)
 
-renderTodos()
+// renderTodos()
 const leftSection = document.querySelector(".left")
 const taskButton = document.querySelector('#add-todo')
 const projectButton = document.querySelector('#add-project')
@@ -53,7 +55,7 @@ let currentEditId = null
 
 function handleEditClick(id) {
   currentEditId = id
-  const todo = getTodos().find((t) => t.id === id)
+  const todo = getTodos(todos).find((t) => t.id === id)
   todoForm.name.value = todo.name
   todoForm.description.value = todo.description
   // todoForm.priority.value = todo.priority
@@ -66,12 +68,12 @@ todoForm.addEventListener('submit', (e) => {
   const formData = Object.fromEntries(new FormData(todoForm))
 
   if (currentEditId) {
-    updateTodo(currentEditId, createTodo(formData))
+    todos = updateTodo(todos, currentEditId, createTodo(formData))
   } else {
-    setTodos(createTodo(formData))
+    todos = setTodos(todos, createTodo(formData))
   }
 
-  renderTodos(handleEditClick)
+  renderTodos(todos, handleEditClick)
   currentEditId = null
   todoForm.reset()
   taskDialog.close()
@@ -85,6 +87,7 @@ projectButton.addEventListener('click', () => {
 
 const todoBtnClickOnProject = function (id) {
   console.log('project todo clicked', id)
+  taskDialog.showModal()
 }
 
 projectDialog.addEventListener('submit', (e) => {
@@ -100,7 +103,7 @@ projectDialog.addEventListener('submit', (e) => {
 leftSection.addEventListener("click", (e) => {
   e.preventDefault()
   if(e.target.classList.contains("tasks-link")){
-    renderTodos(handleEditClick)
+    renderTodos(todos, handleEditClick)
   }else if (e.target.classList.contains("projects-link")){
     renderProjects(todoBtnClickOnProject)
   }

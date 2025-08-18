@@ -1,6 +1,6 @@
 import { removeTodo, getTodos } from './todoManger'
 
-export const renderTodos = function (onEditClick) {
+export const renderTodos = function (todos, onEditClick) {
   const rightSection = document.querySelector('.right')  
   const container = document.querySelector('.right-container')
   container.innerHTML = '' 
@@ -8,8 +8,9 @@ export const renderTodos = function (onEditClick) {
   title.textContent = 'Todos'
   rightSection.appendChild(title) 
   rightSection.appendChild(container) 
-
-  getTodos().forEach(({ name, description, priority, date, id }) => {
+  console.log(todos);
+  
+  todos.forEach(({ name, description, priority, date, id }) => {
     const todoRow = document.createElement('div')
     todoRow.classList.add('todo-row')
     todoRow.setAttribute('data-id', id)
@@ -30,8 +31,7 @@ export const renderTodos = function (onEditClick) {
     const deleteBtn = document.createElement('button')
     deleteBtn.textContent = 'Delete'
     deleteBtn.addEventListener('click', (e) => {
-      removeTodo(todoRow.dataset.id)
-      renderTodos()
+      renderTodos(removeTodo(todos, todoRow.dataset.id))
     })
 
     nameEle.textContent = name
