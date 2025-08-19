@@ -37,7 +37,7 @@ let todos = []
 // console.log(projects)
 
 // renderTodos()
-const leftSection = document.querySelector(".left")
+const leftSection = document.querySelector('.left')
 const taskButton = document.querySelector('#add-todo')
 const projectButton = document.querySelector('#add-project')
 const taskDialog = document.querySelector('#todo-dialog')
@@ -64,6 +64,8 @@ function handleEditClick(id) {
 }
 
 todoForm.addEventListener('submit', (e) => {
+  console.log(e.target)
+
   e.preventDefault()
   const formData = Object.fromEntries(new FormData(todoForm))
 
@@ -86,8 +88,35 @@ projectButton.addEventListener('click', () => {
 })
 
 const todoBtnClickOnProject = function (id) {
-  console.log('project todo clicked', id)
+  // console.log('project todo clicked', id)
   taskDialog.showModal()
+  const project = getProjects().find((project) => project.id === id)
+  let projectTodos = project.todos
+  console.log(projectTodos)
+
+  todoForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    const formData = Object.fromEntries(new FormData(todoForm))
+    console.log(formData)
+
+    if (currentEditId) {
+      projectTodos = updateTodo(
+        projectTodos,
+        currentEditId,
+        createTodo(formData)
+      )
+    } else {
+      console.log(projectTodos)
+
+      projectTodos = setTodos(projectTodos, createTodo(formData))
+    }
+
+    // renderTodos(todos, handleEditClick)
+    currentEditId = null
+    todoForm.reset()
+    taskDialog.close()
+    console.log(projectTodos)
+  })
 }
 
 projectDialog.addEventListener('submit', (e) => {
@@ -100,11 +129,11 @@ projectDialog.addEventListener('submit', (e) => {
   projectDialog.close()
 })
 
-leftSection.addEventListener("click", (e) => {
+leftSection.addEventListener('click', (e) => {
   e.preventDefault()
-  if(e.target.classList.contains("tasks-link")){
+  if (e.target.classList.contains('tasks-link')) {
     renderTodos(todos, handleEditClick)
-  }else if (e.target.classList.contains("projects-link")){
+  } else if (e.target.classList.contains('projects-link')) {
     renderProjects(todoBtnClickOnProject)
   }
 })
