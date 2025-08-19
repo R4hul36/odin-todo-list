@@ -7,9 +7,10 @@ import {
   getTodos,
   setTodos,
 } from './modules/todoManger'
-import { getProjects, setProjects } from './modules/projectManager'
+import { getProjects, setProjects, updateProjectTodo } from './modules/projectManager'
 import { renderTodos } from './modules/todoDomController'
 import { renderProjects } from './modules/projectDomController'
+import { add } from 'date-fns/fp'
 
 console.log('hellow world')
 
@@ -52,6 +53,7 @@ taskButton.addEventListener('click', (e) => {
 })
 
 let currentEditId = null
+let currProjectId = null
 
 function handleEditClick(id) {
   currentEditId = id
@@ -63,24 +65,40 @@ function handleEditClick(id) {
   taskDialog.showModal()
 }
 
-todoForm.addEventListener('submit', (e) => {
-  console.log(e.target)
-
-  e.preventDefault()
-  const formData = Object.fromEntries(new FormData(todoForm))
-
-  if (currentEditId) {
-    todos = updateTodo(todos, currentEditId, createTodo(formData))
-  } else {
-    todos = setTodos(todos, createTodo(formData))
-  }
-
-  renderTodos(todos, handleEditClick)
-  currentEditId = null
-  todoForm.reset()
-  taskDialog.close()
-})
-
+  todoForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    const formData = Object.fromEntries(new FormData(todoForm))
+    
+    if(currProjectId) {
+      let project = getProjects().find((project) => project.id === currProjectId)
+      let projectTodos = project.todos
+      console.log(projectTodos)
+      if (currentEditId) {
+        projectTodos = updateTodo(
+          projectTodos,
+          currentEditId,
+          createTodo(formData)
+        )
+      } else {
+        console.log(projectTodos);
+        projectTodos = setTodos(projectTodos, createTodo(formData))
+      }
+      updateProjectTodo(currProjectId, projectTodos)
+      currProjectId = null
+      console.log(getProjects())
+    }else {
+      if (currentEditId) {
+        todos = updateTodo(todos, currentEditId, createTodo(formData))
+      } else {
+        todos = setTodos(todos, createTodo(formData))
+      }
+      renderTodos(todos, handleEditClick)
+    }
+    
+    currentEditId = null
+    todoForm.reset()
+    taskDialog.close()
+  })
 //Projects
 
 projectButton.addEventListener('click', () => {
@@ -90,33 +108,8 @@ projectButton.addEventListener('click', () => {
 const todoBtnClickOnProject = function (id) {
   // console.log('project todo clicked', id)
   taskDialog.showModal()
-  const project = getProjects().find((project) => project.id === id)
-  let projectTodos = project.todos
-  console.log(projectTodos)
-
-  todoForm.addEventListener('submit', (e) => {
-    e.preventDefault()
-    const formData = Object.fromEntries(new FormData(todoForm))
-    console.log(formData)
-
-    if (currentEditId) {
-      projectTodos = updateTodo(
-        projectTodos,
-        currentEditId,
-        createTodo(formData)
-      )
-    } else {
-      console.log(projectTodos)
-
-      projectTodos = setTodos(projectTodos, createTodo(formData))
-    }
-
-    // renderTodos(todos, handleEditClick)
-    currentEditId = null
-    todoForm.reset()
-    taskDialog.close()
-    console.log(projectTodos)
-  })
+  currProjectId = id
+ 
 }
 
 projectDialog.addEventListener('submit', (e) => {
