@@ -1,15 +1,18 @@
-import { removeTodo, getTodos } from './todoManger'
+// import { removeTodo, getTodos } from './todoManger'
 
-export const renderTodos = function (todos, onEditClick) {
-  const rightSection = document.querySelector('.right')  
-  const container = document.querySelector('.right-container')
-  container.innerHTML = '' 
-  const title = document.querySelector('.title')
-  title.textContent = 'Todos'
-  rightSection.appendChild(title) 
-  rightSection.appendChild(container) 
-  console.log(todos);
-  
+export const renderTodos = function (
+  todos,
+  onEditClick,
+  onDeleteClick,
+  container,
+  projectId = null
+) {
+  container.innerHTML = ''
+  if (container.classList.contains('right-container')) {
+    const title = document.querySelector('.title')
+    title.textContent = 'Todos'
+  }
+
   todos.forEach(({ name, description, priority, date, id }) => {
     const todoRow = document.createElement('div')
     todoRow.classList.add('todo-row')
@@ -20,36 +23,43 @@ export const renderTodos = function (todos, onEditClick) {
 
     const checkBox = document.createElement('input')
     checkBox.type = 'checkbox'
+
     const nameEle = document.createElement('p')
+    nameEle.textContent = name
+
     const descriptionEle = document.createElement('span')
+    descriptionEle.textContent = description
+
     const editBtn = document.createElement('button')
     editBtn.textContent = 'Edit'
     editBtn.addEventListener('click', () => {
-      onEditClick(id)
+      console.log(projectId)
+
+      if (projectId) {
+        onEditClick(projectId, id, container)
+      } else {
+        onEditClick(id, container)
+      }
     })
 
     const deleteBtn = document.createElement('button')
     deleteBtn.textContent = 'Delete'
-    deleteBtn.addEventListener('click', (e) => {
-      renderTodos(removeTodo(todos, todoRow.dataset.id))
-    })
-
-    nameEle.textContent = name
-    descriptionEle.textContent = description
-    checkBox.addEventListener('change', () => {
-      if (checkBox.checked) {
-        console.log('sdfsdf')
+    deleteBtn.addEventListener('click', () => {
+      if (projectId) {
+        onDeleteClick(projectId, id, container)
       } else {
-        console.log('not checked')
+        onDeleteClick(id, container)
       }
     })
+
     textWrapper.appendChild(nameEle)
     textWrapper.appendChild(descriptionEle)
+
     todoRow.appendChild(checkBox)
     todoRow.appendChild(textWrapper)
     todoRow.appendChild(editBtn)
     todoRow.appendChild(deleteBtn)
+
     container.appendChild(todoRow)
-    rightSection.appendChild(container)
   })
 }
