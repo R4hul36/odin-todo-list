@@ -9,7 +9,8 @@ export const renderProjects = function (handleTodo, onEditClick = () => {},
   title.textContent = 'Projects'
   rightSection.appendChild(title)
   rightSection.appendChild(container)
-
+    console.log(getProjects());
+    
   getProjects().forEach(({ projectName, projectDescription, id, todos }) => {
     // console.log((projectDescription));
     const projectRow = document.createElement('div')
@@ -30,7 +31,7 @@ export const renderProjects = function (handleTodo, onEditClick = () => {},
     projectTodoContainer.classList.add(`todo-container`)
     projectTodoContainer.dataset.projectId = id
 
-    renderTodos(
+    renderTodos( 
       todos,
       onEditClick,
       onDeleteClick,

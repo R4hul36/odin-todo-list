@@ -1,13 +1,15 @@
-const projects = []
+import { getProjectsFromLocalStorage } from "./localStorage"
+const projects = getProjectsFromLocalStorage()
 
 export const getProjects = function () {
-  console.log('gettt')
+  console.log(projects)
   return projects
 }
 
 export const setProjects = function (project) {
-  console.log('settt')
+  console.log(projects)
   projects.push(project)
+  return projects
 }
 
 export const updateProjectTodo = function (id, todos) {
@@ -16,3 +18,4 @@ export const updateProjectTodo = function (id, todos) {
     project.todos = todos
   }
 }
+ 

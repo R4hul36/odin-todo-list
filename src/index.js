@@ -7,6 +7,8 @@ import {
   getTodos,
   setTodos,
 } from './modules/todoManger'
+import { setTodosToLocalStorage, getTodosFromLocalStorage, setProjectsToLocalStorage, getProjectsFromLocalStorage } from './modules/localStorage'
+
 import {
   getProjects,
   setProjects,
@@ -18,7 +20,7 @@ import { add } from 'date-fns/fp'
 
 console.log('hellow world')
 
-let todos = []
+let todos = getTodosFromLocalStorage()
 
 // let projects = []
 
@@ -70,7 +72,8 @@ const handleTodoEditClick = function (id) {
 }
 
 const handleTodoDeleteClick = function (id, container) {
-  todos = removeTodo(todos, id)
+  setTodosToLocalStorage(removeTodo(todos, id))
+  todos = getTodosFromLocalStorage()
   renderTodos(todos, handleTodoEditClick, handleTodoDeleteClick, container)
 }
 
@@ -78,7 +81,8 @@ const handleProjectTodoEditClick = function (projectId, id, container) {
   console.log(projectId, id, container, getProjects())
   currProjectId = projectId
   currentEditId = id
-  const project = getProjects().find((p) => p.id === projectId)
+  const projects = getProjectsFromLocalStorage()
+  const project = projects.find((p) => p.id === projectId)
   const todo = project.todos.find((todo) => todo.id === id)
   todoForm.name.value = todo.name
   todoForm.description.value = todo.description
@@ -91,6 +95,7 @@ const handleProjectTodoDeleteClick = function (projectId, id, container) {
   const project = getProjects().find((p) => p.id === projectId)
   const updatedTodos = removeTodo(project.todos, id)
   updateProjectTodo(projectId, updatedTodos)
+  setProjectsToLocalStorage(getProjects())
   renderTodos(
     updatedTodos,
     handleProjectTodoEditClick,
@@ -105,7 +110,9 @@ todoForm.addEventListener('submit', (e) => {
   const formData = Object.fromEntries(new FormData(todoForm))
 
   if (currProjectId) {
-    let project = getProjects().find((project) => project.id === currProjectId)
+   
+    const projects = getProjectsFromLocalStorage()
+    let project = projects.find((project) => project.id === currProjectId)
     let projectTodos = project.todos
     console.log(projectTodos)
     if (currentEditId) {
@@ -122,8 +129,8 @@ todoForm.addEventListener('submit', (e) => {
     let container = document.querySelector(
       `[data-project-id="${currProjectId}"]`
     )
-
     updateProjectTodo(currProjectId, projectTodos)
+    setProjectsToLocalStorage(getProjects())
     renderTodos(
       projectTodos,
       handleProjectTodoEditClick,
@@ -136,9 +143,11 @@ todoForm.addEventListener('submit', (e) => {
     console.log(getProjects())
   } else {
     if (currentEditId) {
-      todos = updateTodo(todos, currentEditId, createTodo(formData))
+      setTodosToLocalStorage(updateTodo(todos, currentEditId, createTodo(formData)))
+      todos = getTodosFromLocalStorage()
     } else {
-      todos = setTodos(todos, createTodo(formData))
+      setTodosToLocalStorage(setTodos(todos, createTodo(formData)))
+      todos = getTodosFromLocalStorage()
     }
     let container = document.querySelector('.right-container')
     renderTodos(todos, handleTodoEditClick, handleTodoDeleteClick, container)
@@ -148,6 +157,8 @@ todoForm.addEventListener('submit', (e) => {
   todoForm.reset()
   taskDialog.close()
 })
+
+renderTodos(todos, handleTodoEditClick, handleTodoDeleteClick, document.querySelector('.right-container'))
 //Projects
 
 projectButton.addEventListener('click', () => {
@@ -163,7 +174,9 @@ const todoBtnClickOnProject = function (id) {
 projectDialog.addEventListener('submit', (e) => {
   e.preventDefault()
   const formData = Object.fromEntries(new FormData(projectForm))
-  setProjects(createProject(formData))
+  
+  setProjectsToLocalStorage(setProjects(createProject(formData)))
+  
   // console.log(formData)
   // console.log(getProjects())
   renderProjects(todoBtnClickOnProject, handleProjectTodoEditClick, handleProjectTodoDeleteClick)
