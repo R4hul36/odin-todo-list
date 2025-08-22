@@ -166,7 +166,7 @@ projectDialog.addEventListener('submit', (e) => {
   setProjects(createProject(formData))
   // console.log(formData)
   // console.log(getProjects())
-  renderProjects(todoBtnClickOnProject)
+  renderProjects(todoBtnClickOnProject, handleProjectTodoEditClick, handleProjectTodoDeleteClick)
   projectDialog.close()
 })
 
@@ -176,6 +176,6 @@ leftSection.addEventListener('click', (e) => {
     let container = document.querySelector('.right-container')
     renderTodos(todos, handleTodoEditClick, handleTodoDeleteClick, container)
   } else if (e.target.classList.contains('projects-link')) {
-    renderProjects(todoBtnClickOnProject)
+    renderProjects(todoBtnClickOnProject, handleProjectTodoEditClick, handleProjectTodoDeleteClick)
   }
 })

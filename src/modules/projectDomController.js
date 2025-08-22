@@ -1,6 +1,7 @@
 import { getProjects } from './projectManager'
 import { renderTodos } from './todoDomController'
-export const renderProjects = function (handleTodo) {
+export const renderProjects = function (handleTodo, onEditClick = () => {},
+  onDeleteClick = () => {}) {
   const rightSection = document.querySelector('.right')
   const container = document.querySelector('.right-container')
   container.innerHTML = ''
@@ -31,9 +32,10 @@ export const renderProjects = function (handleTodo) {
 
     renderTodos(
       todos,
-      () => {},
-      () => {},
-      projectTodoContainer
+      onEditClick,
+      onDeleteClick,
+      projectTodoContainer,
+      id
     )
 
     projectRow.appendChild(name)
