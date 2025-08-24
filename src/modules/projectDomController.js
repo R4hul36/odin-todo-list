@@ -1,7 +1,9 @@
 import { getProjects } from './projectManager'
 import { renderTodos } from './todoDomController'
+import { getProjectsFromLocalStorage } from './localStorage'
+
 export const renderProjects = function (handleTodo, onEditClick = () => {},
-  onDeleteClick = () => {}) {
+  onTodoDeleteClick , onProjectDeleteClick) {
   const rightSection = document.querySelector('.right')
   const container = document.querySelector('.right-container')
   container.innerHTML = ''
@@ -11,7 +13,7 @@ export const renderProjects = function (handleTodo, onEditClick = () => {},
   rightSection.appendChild(container)
     console.log(getProjects());
     
-  getProjects().forEach(({ projectName, projectDescription, id, todos }) => {
+  getProjectsFromLocalStorage().forEach(({ projectName, projectDescription, id, todos }) => {
     // console.log((projectDescription));
     const projectRow = document.createElement('div')
     projectRow.classList.add('project-row')
@@ -19,6 +21,13 @@ export const renderProjects = function (handleTodo, onEditClick = () => {},
 
     const name = document.createElement('p')
     name.textContent = projectName
+
+    const deleteProjectBtn = document.createElement('button')
+    deleteProjectBtn.textContent = "Delete"
+    deleteProjectBtn.addEventListener("click", (e) => {
+      console.log("delete project");
+      onProjectDeleteClick(id)
+    })
 
     const addTodo = document.createElement('button')
     addTodo.textContent = 'Add Todo'
@@ -34,12 +43,13 @@ export const renderProjects = function (handleTodo, onEditClick = () => {},
     renderTodos( 
       todos,
       onEditClick,
-      onDeleteClick,
+      onTodoDeleteClick,
       projectTodoContainer,
       id
     )
 
     projectRow.appendChild(name)
+    projectRow.appendChild(deleteProjectBtn)
     projectRow.appendChild(addTodo)
     projectRow.appendChild(projectTodoContainer)
     container.appendChild(projectRow)

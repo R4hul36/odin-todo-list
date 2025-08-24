@@ -13,6 +13,7 @@ import {
   getProjects,
   setProjects,
   updateProjectTodo,
+  removeProject
 } from './modules/projectManager'
 import { renderTodos } from './modules/todoDomController'
 import { renderProjects } from './modules/projectDomController'
@@ -72,13 +73,23 @@ const handleTodoEditClick = function (id) {
 }
 
 const handleTodoDeleteClick = function (id, container) {
+  
   setTodosToLocalStorage(removeTodo(todos, id))
   todos = getTodosFromLocalStorage()
   renderTodos(todos, handleTodoEditClick, handleTodoDeleteClick, container)
 }
 
+const handleProjectDeleteClick = function (id) {
+  console.log("ysdfsdf");
+  
+  const projects = getProjectsFromLocalStorage()
+  setProjectsToLocalStorage(removeProject(id, projects))
+  renderProjects(todoBtnClickOnProject, handleProjectTodoEditClick, handleProjectTodoDeleteClick, handleProjectDeleteClick)
+}
+
 const handleProjectTodoEditClick = function (projectId, id, container) {
-  console.log(projectId, id, container, getProjects())
+  console.log("hhhhhh");
+  
   currProjectId = projectId
   currentEditId = id
   const projects = getProjectsFromLocalStorage()
@@ -179,7 +190,7 @@ projectDialog.addEventListener('submit', (e) => {
   
   // console.log(formData)
   // console.log(getProjects())
-  renderProjects(todoBtnClickOnProject, handleProjectTodoEditClick, handleProjectTodoDeleteClick)
+  renderProjects(todoBtnClickOnProject, handleProjectTodoEditClick, handleProjectTodoDeleteClick, handleProjectDeleteClick)
   projectDialog.close()
 })
 
@@ -189,6 +200,6 @@ leftSection.addEventListener('click', (e) => {
     let container = document.querySelector('.right-container')
     renderTodos(todos, handleTodoEditClick, handleTodoDeleteClick, container)
   } else if (e.target.classList.contains('projects-link')) {
-    renderProjects(todoBtnClickOnProject, handleProjectTodoEditClick, handleProjectTodoDeleteClick)
+    renderProjects(todoBtnClickOnProject, handleProjectTodoEditClick, handleProjectTodoDeleteClick, handleProjectDeleteClick)
   }
 })

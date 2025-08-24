@@ -19,3 +19,6 @@ export const updateProjectTodo = function (id, todos) {
   }
 }
  
+export const removeProject = function (id, projects) {
+  return projects.filter((project) => project.id !== id);
+}

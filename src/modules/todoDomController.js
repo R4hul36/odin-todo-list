@@ -23,6 +23,15 @@ export const renderTodos = function (
 
     const checkBox = document.createElement('input')
     checkBox.type = 'checkbox'
+    checkBox.addEventListener("change", (e) => {
+      if(checkBox.checked) {
+        if (projectId) {
+        onDeleteClick(projectId, id, container)
+      } else {
+        onDeleteClick(id, container)
+      }
+      }
+    })
 
     const nameEle = document.createElement('p')
     nameEle.textContent = name
@@ -42,15 +51,15 @@ export const renderTodos = function (
       }
     })
 
-    const deleteBtn = document.createElement('button')
-    deleteBtn.textContent = 'Delete'
-    deleteBtn.addEventListener('click', () => {
-      if (projectId) {
-        onDeleteClick(projectId, id, container)
-      } else {
-        onDeleteClick(id, container)
-      }
-    })
+    // const deleteBtn = document.createElement('button')
+    // deleteBtn.textContent = 'Delete'
+    // deleteBtn.addEventListener('click', () => {
+    //   if (projectId) {
+    //     onDeleteClick(projectId, id, container)
+    //   } else {
+    //     onDeleteClick(id, container)
+    //   }
+    // })
 
     textWrapper.appendChild(nameEle)
     textWrapper.appendChild(descriptionEle)
@@ -58,7 +67,7 @@ export const renderTodos = function (
     todoRow.appendChild(checkBox)
     todoRow.appendChild(textWrapper)
     todoRow.appendChild(editBtn)
-    todoRow.appendChild(deleteBtn)
+    // todoRow.appendChild(deleteBtn)
 
     container.appendChild(todoRow)
   })
