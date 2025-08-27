@@ -10,6 +10,7 @@ export const renderProjects = function (
 ) {
   const rightSection = document.querySelector('.right')
   const container = document.querySelector('.right-container')
+  
   container.innerHTML = ''
   const title = document.querySelector('.title')
   title.textContent = 'Projects'
