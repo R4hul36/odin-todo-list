@@ -23,13 +23,13 @@ export const renderTodos = function (
 
     const checkBox = document.createElement('input')
     checkBox.type = 'checkbox'
-    checkBox.addEventListener("change", (e) => {
-      if(checkBox.checked) {
+    checkBox.addEventListener('change', (e) => {
+      if (checkBox.checked) {
         if (projectId) {
-        onDeleteClick(projectId, id, container)
-      } else {
-        onDeleteClick(id, container)
-      }
+          onDeleteClick(projectId, id, container)
+        } else {
+          onDeleteClick(id, container)
+        }
       }
     })
 
