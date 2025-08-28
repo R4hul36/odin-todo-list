@@ -38,6 +38,15 @@ const projectDialog = document.querySelector('#project-dialog')
 const todoForm = document.querySelector('.todo-form')
 const projectForm = document.querySelector('.project-form')
 
+const cancelBtn = document.querySelectorAll('.cancel-btn')
+
+cancelBtn.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    taskDialog.close()
+    projectDialog.close()
+  })
+})
+
 //Todos
 taskButton.addEventListener('click', (e) => {
   taskDialog.showModal()
@@ -64,7 +73,6 @@ const handleTodoDeleteClick = function (id, container) {
 }
 
 const handleProjectDeleteClick = function (id) {
- 
   const projects = getProjectsFromLocalStorage()
   setProjectsToLocalStorage(removeProject(id, projects))
   renderProjects(
@@ -158,39 +166,47 @@ todoForm.addEventListener('submit', (e) => {
 })
 
 const onInitialPageLoad = function (title, msg, btnText, dialog) {
-    rightContainer.innerHTML = ''
+  rightContainer.innerHTML = ''
 
-    document.querySelector(".title").textContent = title
-    const emptyTodoContainer = document.createElement('div')
-    const message = document.createElement('p')
-    message.textContent = msg
-    const addBtn = document.createElement('button')
-    addBtn.textContent = btnText
-    addBtn.classList.add('todo-add-btn')
-    addBtn.addEventListener('click', (e) => {
-      dialog.showModal()
-    })
-    emptyTodoContainer.appendChild(message)
-    emptyTodoContainer.appendChild(addBtn)
-    rightContainer.appendChild(emptyTodoContainer)
+  document.querySelector('.title').textContent = title
+  const emptyTodoContainer = document.createElement('div')
+  const message = document.createElement('p')
+  message.textContent = msg
+  const addBtn = document.createElement('button')
+  addBtn.textContent = btnText
+  addBtn.classList.add('todo-add-btn')
+  addBtn.addEventListener('click', (e) => {
+    dialog.showModal()
+  })
+  emptyTodoContainer.appendChild(message)
+  emptyTodoContainer.appendChild(addBtn)
+  rightContainer.appendChild(emptyTodoContainer)
 }
 
 const intialTodosRender = function () {
-  if(todos.length === 0) {
-    onInitialPageLoad("Todos", 'No Tasks yet.', '+ Add Todo', taskDialog)
-  }else {
-    renderTodos(todos, handleTodoEditClick, handleTodoDeleteClick, rightContainer)
+  if (todos.length === 0) {
+    onInitialPageLoad('Todos', 'No Tasks yet.', '+ Add Todo', taskDialog)
+  } else {
+    renderTodos(
+      todos,
+      handleTodoEditClick,
+      handleTodoDeleteClick,
+      rightContainer
+    )
   }
 }
 
 const initialProjectsRender = function () {
-  console.log("deleted");
-  
-  
-  
-  if(getProjectsFromLocalStorage().length === 0) {
-    onInitialPageLoad("Projects", "No Projects yet.", "+ Add Project", projectDialog)
-  }else {
+  console.log('deleted')
+
+  if (getProjectsFromLocalStorage().length === 0) {
+    onInitialPageLoad(
+      'Projects',
+      'No Projects yet.',
+      '+ Add Project',
+      projectDialog
+    )
+  } else {
     renderProjects(
       todoBtnClickOnProject,
       handleProjectTodoEditClick,

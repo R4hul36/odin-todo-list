@@ -19,24 +19,35 @@
       </aside>
       <div class="right">
         <h1 class="title"></h1>
-        <div class="right-container"></div> 
+        <div class="right-container"></div>
       </div>
     </div>
     <dialog id="todo-dialog" class="form-dialog">
       <form class="todo-form" action="">
-        <label for="name">Name: </label>
-        <input type="text" id="name" name="name" required />
-        <label for="description">Description: </label>
-        <input type="text" id="description" name="description" />
-        <label for="priority">Priority</label>
-        <select name="priority" id="priority">
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-        </select>
-        <label for="dueDate">Due Date: </label>
-        <input type="datetime-local" id="dueDate" name="dueDate" />
-        <button type="submit">Submit</button>
+        <div class="form-group">
+          <label for="name">Name: </label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+          <label for="description">Description: </label>
+          <input type="text" id="description" name="description" />
+        </div>
+        <div class="form-group">
+          <label for="priority">Priority</label>
+          <select name="priority" id="priority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="dueDate">Due Date: </label>
+          <input type="datetime-local" id="dueDate" name="dueDate" />
+        </div>
+        <div class="btn-container">
+          <button type="button" class="cancel-btn">Cancel</button>
+          <button type="submit" class="submit-btn">Submit</button>
+        </div>
       </form>
     </dialog>
     <dialog id="project-dialog" class="form-dialog">
@@ -45,7 +56,10 @@
         <input type="text" id="project-name" name="projectName" required />
         <label for="project-description">Description: </label>
         <input type="text" id="project-description" name="projectDescription" />
-        <button type="submit">Submit</button>
+        <div class="btn-container">
+          <button type="button" class="cancel-btn">Cancel</button>
+          <button type="submit" class="submit-btn">Submit</button>
+        </div>
       </form>
     </dialog>
   </body>
