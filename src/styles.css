@@ -65,14 +65,13 @@ dialog {
   width: 300px;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
 }
 
 .todo-row {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 1.4rem;
+  margin-bottom: 1rem;
 }
 
 .todo-row > p {
@@ -90,6 +89,8 @@ dialog {
 .todo-text {
   font-size: 16px;
 }
+
+.edit-btn {}
 
 .edit-btn,
 .remove-btn
@@ -118,7 +119,9 @@ dialog {
   height: 450px;
 }
 
-.todo-form {
+.todo-form,
+.project-form 
+{
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -129,7 +132,9 @@ dialog {
   gap: 0.5rem;
 }
 .todo-form input,
-.todo-form select {
+.todo-form select,
+.project-form input
+{
   padding: 0.4rem;
 }
 
@@ -151,6 +156,10 @@ dialog {
 }
 
 /* Projects */
+
+#project-dialog {
+  height: 300px;
+}
 
 .project-row {
   width: 400px;
@@ -188,6 +197,7 @@ dialog {
   outline: none;
   background-color: white;
   color: green;
+  margin-top: 0.5rem;
 }
 
 .project-add-todo,
