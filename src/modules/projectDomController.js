@@ -16,7 +16,7 @@ export const renderProjects = function (
   title.textContent = 'Projects'
   rightSection.appendChild(title)
   rightSection.appendChild(container)
-  console.log(getProjects())
+  console.log(getProjectsFromLocalStorage())
 
   getProjectsFromLocalStorage().forEach(
     ({ projectName, projectDescription, id, todos }) => {

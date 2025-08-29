@@ -74,7 +74,10 @@ const handleTodoDeleteClick = function (id, container) {
 
 const handleProjectDeleteClick = function (id) {
   const projects = getProjectsFromLocalStorage()
+  
+  
   setProjectsToLocalStorage(removeProject(id, projects))
+  console.log(getProjectsFromLocalStorage());
   renderProjects(
     todoBtnClickOnProject,
     handleProjectTodoEditClick,

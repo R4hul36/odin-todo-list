@@ -1,4 +1,4 @@
-import { getProjectsFromLocalStorage } from "./localStorage"
+import { getProjectsFromLocalStorage, setProjectsToLocalStorage } from "./localStorage"
 const projects = getProjectsFromLocalStorage()
 
 export const getProjects = function () {
@@ -7,8 +7,9 @@ export const getProjects = function () {
 }
 
 export const setProjects = function (project) {
-  console.log(projects)
+  const projects = getProjectsFromLocalStorage()
   projects.push(project)
+  setProjectsToLocalStorage(projects)
   return projects
 }
 
