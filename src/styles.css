@@ -72,6 +72,7 @@ dialog {
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin-bottom: 1.4rem;
 }
 
 .todo-row > p {
@@ -90,33 +91,43 @@ dialog {
   font-size: 16px;
 }
 
+.edit-btn {
+  border: none;
+  background-color: white;
+  color: rgb(95, 95, 95);
+  cursor: pointer;
+  opacity: 0;
+  margin-left: 2rem;
+  transition: opacity 0.3s ease;
+}
+
+.todo-row:hover .edit-btn {
+  opacity: 1;
+}
+
 .todo-container {
-  display: flex; 
-  flex-direction: column;
-  gap: 1rem;
-}
-
-dialog {
-  padding: 2rem;
-}
-
-.todo-form,
-.project-form 
-{
-  width: 300px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
+.form-dialog {
+  width: 400px;
+  height: 450px;
+}
+
+.todo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
-
-input,
-select {
+.todo-form input,
+.todo-form select {
   padding: 0.4rem;
 }
 
@@ -160,7 +171,6 @@ select {
   outline: none;
   background-color: white;
   color: green;
-  margin-top: 10px;
 }
 
 .project-top-row .todo-text {

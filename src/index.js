@@ -109,12 +109,13 @@ const handleProjectTodoDeleteClick = function (projectId, id, container) {
     container,
     projectId
   )
+  currentEditId = null
 }
 
 todoForm.addEventListener('submit', (e) => {
   e.preventDefault()
   const formData = Object.fromEntries(new FormData(todoForm))
-
+  console.log(currProjectId)
   if (currProjectId) {
     const projects = getProjectsFromLocalStorage()
     let project = projects.find((project) => project.id === currProjectId)
@@ -222,6 +223,7 @@ intialTodosRender()
 
 projectButton.addEventListener('click', () => {
   projectDialog.showModal()
+  projectForm.reset()
 })
 
 const todoBtnClickOnProject = function (id) {
