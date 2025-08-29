@@ -32,8 +32,25 @@ export const renderProjects = function (
       name.textContent = projectName
 
       const removeProjectBtn = document.createElement('button')
-
-      removeProjectBtn.textContent = 'Delete'
+      removeProjectBtn.classList.add('remove-btn')
+      removeProjectBtn.setAttribute('aria-label', 'Remove')
+      removeProjectBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" 
+       viewBox="0 0 24 24" 
+       width="18" height="18" 
+       fill="none" 
+       aria-hidden="true">
+    <path d="M20 6H4M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M18 6l-1 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 6"
+          stroke="currentColor" 
+          stroke-width="1.5" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
+    <path d="M10 11v6M14 11v6" 
+          stroke="currentColor" 
+          stroke-width="1.5" 
+          stroke-linecap="round"/>
+  </svg>
+`
+      // removeProjectBtn.textContent = 'Delete'
       removeProjectBtn.addEventListener('click', (e) => {
         console.log('delete project')
         onProjectDeleteClick(id)

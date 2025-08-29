@@ -91,7 +91,9 @@ dialog {
   font-size: 16px;
 }
 
-.edit-btn {
+.edit-btn,
+.remove-btn
+{
   border: none;
   background-color: white;
   color: rgb(95, 95, 95);
@@ -150,9 +152,24 @@ dialog {
 
 /* Projects */
 
+.project-row {
+  width: 400px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 16px;
+  background-color: #fafafa;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+
+.project-row:hover .remove-btn{
+  opacity: 1;
+}
+
 .project-top-row {
   display: flex;
-  gap: 1rem;
+  justify-content: space-between;
   margin-bottom: 10px;
 }
 
@@ -171,6 +188,13 @@ dialog {
   outline: none;
   background-color: white;
   color: green;
+}
+
+.project-add-todo,
+.edit-btn,
+.remove-btn
+{
+  background-color: #fafafa;
 }
 
 .project-top-row .todo-text {
