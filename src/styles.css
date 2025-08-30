@@ -62,7 +62,7 @@ dialog {
 .right-container {
   margin-top: 10px;
   padding: 20px;
-  width: 300px;
+  width: 500px;
   display: flex;
   flex-direction: column;
 }
@@ -77,10 +77,18 @@ dialog {
 .todo-row > p {
   align-self: flex-end;
 }
+
+.todo-row input {
+  align-self: flex-start;
+  margin-top: 4px;
+}
+
 .todo-row span {
-  position: absolute;
   color: grey;
   font-size: 14px;
+  max-width: 100%;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .text-wrapper {
@@ -88,13 +96,17 @@ dialog {
 }
 .todo-text {
   font-size: 16px;
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
-.edit-btn {}
+.edit-btn {
+}
 
 .edit-btn,
-.remove-btn
-{
+.remove-btn {
   border: none;
   background-color: white;
   color: rgb(95, 95, 95);
@@ -120,8 +132,7 @@ dialog {
 }
 
 .todo-form,
-.project-form 
-{
+.project-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -133,8 +144,7 @@ dialog {
 }
 .todo-form input,
 .todo-form select,
-.project-form input
-{
+.project-form input {
   padding: 0.4rem;
 }
 
@@ -162,17 +172,19 @@ dialog {
 }
 
 .project-row {
-  width: 400px;
+  width: 500px;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 12px;
   margin-bottom: 16px;
   background-color: #fafafa;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  white-space: wrap;
+  text-overflow: ellipsis;
 }
 
-
-.project-row:hover .remove-btn{
+.project-row:hover .remove-btn {
   opacity: 1;
 }
 
@@ -202,8 +214,7 @@ dialog {
 
 .project-add-todo,
 .edit-btn,
-.remove-btn
-{
+.remove-btn {
   background-color: #fafafa;
 }
 
