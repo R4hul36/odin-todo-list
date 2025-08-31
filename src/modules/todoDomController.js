@@ -1,5 +1,5 @@
 // import { removeTodo, getTodos } from './todoManger'
-
+import { format } from 'date-fns'
 export const renderTodos = function (
   todos,
   onEditClick,
@@ -59,8 +59,15 @@ export const renderTodos = function (
       }
     })
 
+    const dueDate = document.createElement("p")
+    console.log(date, )
+    
+    dueDate.textContent = date === format(new Date(), 'yyyy-MM-dd') ? "Today" : date;
+   
+
     textWrapper.appendChild(nameEle)
     textWrapper.appendChild(descriptionEle)
+    textWrapper.appendChild(dueDate)
 
     todoRow.appendChild(checkBox)
     todoRow.appendChild(textWrapper)

@@ -61,7 +61,7 @@ const handleTodoEditClick = function (id) {
   todoForm.name.value = todo.name
   todoForm.description.value = todo.description
   // todoForm.priority.value = todo.priority
-  // todoForm.dueDate.value = todo.date
+  todoForm.dueDate.value = todo.date
   taskDialog.showModal()
 }
 
@@ -95,6 +95,7 @@ const handleProjectTodoEditClick = function (projectId, id, container) {
   const todo = project.todos.find((todo) => todo.id === id)
   todoForm.name.value = todo.name
   todoForm.description.value = todo.description
+  todoForm.dueDate.value = todo.date
   taskDialog.showModal()
 }
 

@@ -78,10 +78,10 @@ dialog {
   align-self: flex-end;
 }
 
-.todo-row input {
+/* .todo-row input {
   align-self: flex-start;
   margin-top: 4px;
-}
+} */
 
 .todo-row span {
   color: grey;
@@ -96,7 +96,6 @@ dialog {
 }
 .todo-text {
   font-size: 16px;
-  flex: 1;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
