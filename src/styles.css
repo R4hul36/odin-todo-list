@@ -71,38 +71,54 @@ dialog {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.7rem;
+  border: 1px solid grey;
+  border-radius: 4px;
+  padding: 1rem;
+  
 }
 
 .todo-row > p {
   align-self: flex-end;
 }
 
-/* .todo-row input {
+.todo-row input {
   align-self: flex-start;
   margin-top: 4px;
-} */
+}
 
-.todo-row span {
+.todo-row span,
+.todo-row .date
+{
+  display: block;
   color: grey;
   font-size: 14px;
   max-width: 100%;
   white-space: normal;
   word-break: break-word;
 }
+.todo-title {
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 250px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.date {
+  margin-top: 0.7rem;
+}
 
 .text-wrapper {
   position: relative;
 }
 .todo-text {
-  font-size: 16px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  flex: 1; 
 }
 
-.edit-btn {
-}
+ 
 
 .edit-btn,
 .remove-btn {
@@ -113,6 +129,10 @@ dialog {
   opacity: 0;
   margin-left: 2rem;
   transition: opacity 0.3s ease;
+}
+
+.edit-btn {
+  align-self: flex-end;
 }
 
 .todo-row:hover .edit-btn {

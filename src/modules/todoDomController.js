@@ -34,7 +34,9 @@ export const renderTodos = function (
     })
 
     const nameEle = document.createElement('p')
+    nameEle.classList.add("todo-title")
     nameEle.textContent = name
+
 
     const descriptionEle = document.createElement('span')
     descriptionEle.textContent = description
@@ -61,6 +63,10 @@ export const renderTodos = function (
 
     const dueDate = document.createElement("p")
     console.log(date, )
+    dueDate.classList.add("date")
+
+    // Disables all dates prior to today
+    document.querySelector("#dueDate").setAttribute("min", format(new Date(), 'yyyy-MM-dd'))
     
     dueDate.textContent = date === format(new Date(), 'yyyy-MM-dd') ? "Today" : date;
    
