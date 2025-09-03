@@ -125,6 +125,8 @@ todoForm.addEventListener('submit', (e) => {
     let project = projects.find((project) => project.id === currProjectId)
     let projectTodos = project.todos
     console.log(projectTodos)
+    
+    
     if (currentEditId) {
       projectTodos = updateTodo(
         projectTodos,
@@ -132,15 +134,14 @@ todoForm.addEventListener('submit', (e) => {
         createTodo(formData)
       )
     } else {
-      console.log(projectTodos)
       projectTodos = setTodos(projectTodos, createTodo(formData))
     }
-
+    
     let container = document.querySelector(
       `[data-project-id="${currProjectId}"]`
     )
     updateProjectTodo(currProjectId, projectTodos)
-    setProjectsToLocalStorage(getProjects())
+    
     renderTodos(
       projectTodos,
       handleProjectTodoEditClick,

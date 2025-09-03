@@ -5,7 +5,7 @@ export const setTodosToLocalStorage = function(todos) {
 export const getTodosFromLocalStorage = function () {
     const todos = JSON.parse(localStorage.getItem("todos"))
     if(todos === null){
-        return []
+        return [] 
     }
     return todos;
 }
