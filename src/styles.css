@@ -80,6 +80,7 @@ dialog {
 
 .todo-row > p {
   align-self: flex-end;
+  
 }
 
 .todo-row input {
@@ -87,16 +88,20 @@ dialog {
   margin-top: 4px;
 }
 
-.todo-row span,
+.todo-row .description,
 .todo-row .date
 {
   display: block;
-  color: grey;
   font-size: 14px;
   max-width: 100%;
   white-space: normal;
   word-break: break-word;
 }
+.todo-row .description {
+  color: grey;
+  margin-top: 0.2rem;
+}
+
 .todo-title {
   font-weight: bold;
   white-space: nowrap;
@@ -105,6 +110,7 @@ dialog {
   max-width: 250px;
   display: inline-block;
   vertical-align: middle;
+  font-size: 1.2rem;
 }
 
 .date {
@@ -118,7 +124,19 @@ dialog {
   flex: 1; 
 }
 
- 
+.badge {
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: white;
+  margin-left: 1rem;
+  
+} 
+
+.badge-high { background: red; }
+.badge-medium { background: orange; }
+.badge-low { background: green; }
 
 .edit-btn,
 .remove-btn {

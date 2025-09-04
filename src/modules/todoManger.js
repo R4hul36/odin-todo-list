@@ -1,4 +1,4 @@
-// let todos = []
+
 
 export const getTodos = function (todos) {
   return todos

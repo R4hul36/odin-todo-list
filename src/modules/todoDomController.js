@@ -7,6 +7,7 @@ export const renderTodos = function (
   container,
   projectId = null
 ) {
+  // clears DOM before each render
   container.innerHTML = ''
   if (container.classList.contains('right-container')) {
     const title = document.querySelector('.title')
@@ -17,6 +18,8 @@ export const renderTodos = function (
     const todoRow = document.createElement('div')
     todoRow.classList.add('todo-row')
     todoRow.setAttribute('data-id', id)
+    console.log(priority);
+    
 
     const textWrapper = document.createElement('div')
     textWrapper.classList.add('todo-text')
@@ -25,6 +28,7 @@ export const renderTodos = function (
     checkBox.type = 'checkbox'
     checkBox.addEventListener('change', (e) => {
       if (checkBox.checked) {
+        // Checks if it's a project or not by checking if projectId is present and runs relevant callback function for removing a todo
         if (projectId) {
           onDeleteClick(projectId, id, container)
         } else {
@@ -32,13 +36,24 @@ export const renderTodos = function (
         }
       }
     })
+    
+    const topTextRow = document.createElement('div')
+    
+
 
     const nameEle = document.createElement('p')
     nameEle.classList.add("todo-title")
     nameEle.textContent = name
 
+    const priorityEle = document.createElement('span')
+    priorityEle.classList.add("badge", `badge-${priority.toLowerCase()}`)
+    priorityEle.textContent = priority
+
+    topTextRow.appendChild(nameEle)
+    topTextRow.appendChild(priorityEle)
 
     const descriptionEle = document.createElement('span')
+    descriptionEle.classList.add('description')
     descriptionEle.textContent = description
 
     const editBtn = document.createElement('button')
@@ -71,7 +86,7 @@ export const renderTodos = function (
     dueDate.textContent = date === format(new Date(), 'yyyy-MM-dd') ? "Today" : date;
    
 
-    textWrapper.appendChild(nameEle)
+    textWrapper.appendChild(topTextRow)
     textWrapper.appendChild(descriptionEle)
     textWrapper.appendChild(dueDate)
 

@@ -22,9 +22,6 @@ import {
 } from './modules/projectManager'
 import { renderTodos } from './modules/todoDomController'
 import { renderProjects } from './modules/projectDomController'
-import { add } from 'date-fns/fp'
-
-console.log('hellow world')
 
 let todos = getTodosFromLocalStorage()
 
@@ -72,6 +69,8 @@ const handleTodoDeleteClick = function (id, container) {
   intialTodosRender()
 }
 
+// Project crud handler functions
+
 const handleProjectDeleteClick = function (id) {
   const projects = getProjectsFromLocalStorage()
   
@@ -116,17 +115,21 @@ const handleProjectTodoDeleteClick = function (projectId, id, container) {
   currentEditId = null
 }
 
+// Todo Form Submission
+
 todoForm.addEventListener('submit', (e) => {
   e.preventDefault()
   const formData = Object.fromEntries(new FormData(todoForm))
-  console.log(currProjectId)
+  console.log(formData)
+
+  // checks if this is a project
   if (currProjectId) {
     const projects = getProjectsFromLocalStorage()
     let project = projects.find((project) => project.id === currProjectId)
     let projectTodos = project.todos
     console.log(projectTodos)
     
-    
+    // If it's a project and it's in edit mode, then update the relevant todo
     if (currentEditId) {
       projectTodos = updateTodo(
         projectTodos,
@@ -153,6 +156,7 @@ todoForm.addEventListener('submit', (e) => {
     currProjectId = null
     console.log(getProjects())
   } else {
+    // This runs for Global Todos that doesn't have a project parent
     if (currentEditId) {
       setTodosToLocalStorage(
         updateTodo(todos, currentEditId, createTodo(formData))
@@ -171,6 +175,7 @@ todoForm.addEventListener('submit', (e) => {
   taskDialog.close()
 })
 
+// Default page of a new user with no data
 const onInitialPageLoad = function (title, msg, btnText, dialog) {
   rightContainer.innerHTML = ''
 
@@ -189,6 +194,7 @@ const onInitialPageLoad = function (title, msg, btnText, dialog) {
   rightContainer.appendChild(emptyTodoContainer)
 }
 
+// Function for default view of Global Todo page
 const intialTodosRender = function () {
   if (todos.length === 0) {
     onInitialPageLoad('Todos', 'No Tasks yet.', '+ Add Todo', taskDialog)
@@ -202,6 +208,7 @@ const intialTodosRender = function () {
   }
 }
 
+// Default view of Projects page
 const initialProjectsRender = function () {
   console.log('deleted')
 
@@ -224,7 +231,7 @@ const initialProjectsRender = function () {
 
 intialTodosRender()
 
-//Projects
+//Opens project form
 
 projectButton.addEventListener('click', () => {
   projectDialog.showModal()
@@ -236,6 +243,8 @@ const todoBtnClickOnProject = function (id) {
   taskDialog.showModal()
   currProjectId = id
 }
+
+// Runs on project form submission
 
 projectDialog.addEventListener('submit', (e) => {
   e.preventDefault()
@@ -253,6 +262,8 @@ projectDialog.addEventListener('submit', (e) => {
   )
   projectDialog.close()
 })
+
+// Event listner for navigation links on the left sidebar
 
 leftSection.addEventListener('click', (e) => {
   e.preventDefault()
