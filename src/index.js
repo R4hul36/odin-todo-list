@@ -23,8 +23,10 @@ import {
 } from './modules/projectManager'
 import { renderTodos } from './modules/todoDomController'
 import { renderProjects } from './modules/projectDomController'
+import { defaultProjects } from './modules/dummyData'
 
 let todos = getTodosFromLocalStorage()
+defaultProjects()
 
 const rightContainer = document.querySelector('.right-container')
 const leftSection = document.querySelector('.left')
