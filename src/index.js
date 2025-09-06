@@ -1,6 +1,7 @@
 import './styles.css'
 import { createTodo } from './modules/todo'
 import { createProject } from './modules/project'
+import { format } from 'date-fns'
 import {
   removeTodo,
   updateTodo,
@@ -41,11 +42,13 @@ cancelBtn.forEach((btn) => {
   btn.addEventListener('click', () => {
     taskDialog.close()
     projectDialog.close()
+    todoForm.reset()
   })
 })
 
 //Todos
 taskButton.addEventListener('click', (e) => {
+  disablePastDates()
   taskDialog.showModal()
 })
 
@@ -57,7 +60,7 @@ const handleTodoEditClick = function (id) {
   const todo = getTodos(todos).find((t) => t.id === id)
   todoForm.name.value = todo.name
   todoForm.description.value = todo.description
-  // todoForm.priority.value = todo.priority
+  todoForm.priority.value = todo.priority
   todoForm.dueDate.value = todo.date
   taskDialog.showModal()
 }
@@ -69,14 +72,18 @@ const handleTodoDeleteClick = function (id, container) {
   intialTodosRender()
 }
 
+const disablePastDates = function () {
+  const dueDateInput = document.querySelector('#dueDate')
+  dueDateInput.setAttribute('min', format(new Date(), 'yyyy-MM-dd'))
+}
+
 // Project crud handler functions
 
 const handleProjectDeleteClick = function (id) {
   const projects = getProjectsFromLocalStorage()
-  
-  
+
   setProjectsToLocalStorage(removeProject(id, projects))
-  console.log(getProjectsFromLocalStorage());
+  console.log(getProjectsFromLocalStorage())
   renderProjects(
     todoBtnClickOnProject,
     handleProjectTodoEditClick,
@@ -95,6 +102,7 @@ const handleProjectTodoEditClick = function (projectId, id, container) {
   todoForm.name.value = todo.name
   todoForm.description.value = todo.description
   todoForm.dueDate.value = todo.date
+  disablePastDates()
   taskDialog.showModal()
 }
 
@@ -128,7 +136,7 @@ todoForm.addEventListener('submit', (e) => {
     let project = projects.find((project) => project.id === currProjectId)
     let projectTodos = project.todos
     console.log(projectTodos)
-    
+
     // If it's a project and it's in edit mode, then update the relevant todo
     if (currentEditId) {
       projectTodos = updateTodo(
@@ -136,15 +144,16 @@ todoForm.addEventListener('submit', (e) => {
         currentEditId,
         createTodo(formData)
       )
+      todoForm.reset()
     } else {
       projectTodos = setTodos(projectTodos, createTodo(formData))
     }
-    
+
     let container = document.querySelector(
       `[data-project-id="${currProjectId}"]`
     )
     updateProjectTodo(currProjectId, projectTodos)
-    
+
     renderTodos(
       projectTodos,
       handleProjectTodoEditClick,
@@ -187,6 +196,7 @@ const onInitialPageLoad = function (title, msg, btnText, dialog) {
   addBtn.textContent = btnText
   addBtn.classList.add('todo-add-btn')
   addBtn.addEventListener('click', (e) => {
+    disablePastDates()
     dialog.showModal()
   })
   emptyTodoContainer.appendChild(message)
@@ -240,6 +250,7 @@ projectButton.addEventListener('click', () => {
 
 const todoBtnClickOnProject = function (id) {
   // console.log('project todo clicked', id)
+  disablePastDates()
   taskDialog.showModal()
   currProjectId = id
 }

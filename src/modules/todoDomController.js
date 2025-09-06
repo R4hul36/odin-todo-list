@@ -18,8 +18,7 @@ export const renderTodos = function (
     const todoRow = document.createElement('div')
     todoRow.classList.add('todo-row')
     todoRow.setAttribute('data-id', id)
-    console.log(priority);
-    
+    console.log(priority)
 
     const textWrapper = document.createElement('div')
     textWrapper.classList.add('todo-text')
@@ -36,17 +35,15 @@ export const renderTodos = function (
         }
       }
     })
-    
-    const topTextRow = document.createElement('div')
-    
 
+    const topTextRow = document.createElement('div')
 
     const nameEle = document.createElement('p')
-    nameEle.classList.add("todo-title")
+    nameEle.classList.add('todo-title')
     nameEle.textContent = name
 
     const priorityEle = document.createElement('span')
-    priorityEle.classList.add("badge", `badge-${priority.toLowerCase()}`)
+    priorityEle.classList.add('badge', `badge-${priority.toLowerCase()}`)
     priorityEle.textContent = priority
 
     topTextRow.appendChild(nameEle)
@@ -76,15 +73,11 @@ export const renderTodos = function (
       }
     })
 
-    const dueDate = document.createElement("p")
-    console.log(date, )
-    dueDate.classList.add("date")
-
-    // Disables all dates prior to today
-    document.querySelector("#dueDate").setAttribute("min", format(new Date(), 'yyyy-MM-dd'))
-    
-    dueDate.textContent = date === format(new Date(), 'yyyy-MM-dd') ? "Today" : date;
-   
+    const dueDate = document.createElement('p')
+    console.log(date)
+    dueDate.classList.add('date')
+    dueDate.textContent =
+      date === format(new Date(), 'yyyy-MM-dd') ? 'Today' : date
 
     textWrapper.appendChild(topTextRow)
     textWrapper.appendChild(descriptionEle)
